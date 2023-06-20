@@ -9,4 +9,4 @@
 <li>Увеличение размера фотографии, по нажатию на нее, с добавлением подписи с названием места</li>
 </ul>
 <p>  Используемые технологии: react, javascript, webpack, html, css, медиавыражения. Применена методология БЭМ.
-<p><a href="https://github.com/Zvereva-Oksana/react-mesto-auth/">Ссылка на проект</a></p>
+<p><a href="https://zvereva-oksana.github.io/react-mesto-auth/">Ссылка на проект</a></p>
