@@ -1,6 +1,7 @@
 @import url(./vendor/normalize.css);
 @import url(./vendor/fonts/fonts.css);
 @import url(./blocks/page/page.css);
+@import url(./blocks/page/_registration-authorization/page_registration-authorization.css);
 @import url(./blocks/header/header.css);
 @import url(./blocks/header/_mobile/header_mobile.css);
 @import url(./blocks/header/__wrapper/header__wrapper.css);

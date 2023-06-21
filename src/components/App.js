@@ -168,7 +168,8 @@ const App = () => {
 
     return (
         <CurrentUserContext.Provider value={currentUser}>
-            <div className="page">
+            <div className={`page ${
+                isLoggedIn ? `` : `page_registration-authorization`}`}>
                 {isMobile && isLoggedIn ?
                     <HeaderMobile email={email} onSignOut={handleLogAuth} isLoggedIn={isLoggedIn}/> :
                     <Header email={email} onSignOut={handleLogAuth} isLoggedIn={isLoggedIn}/>
