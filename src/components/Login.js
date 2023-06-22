@@ -11,7 +11,6 @@ const Login = ({onLogin, addInfoTooltipFalse, tokenCheck, email, password, setEm
             onLogin();
             navigate('/');
         }).catch((err) => {
-            console.log(err, 'err')
             addInfoTooltipFalse()
         })
     }
