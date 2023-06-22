@@ -1,65 +1,34 @@
-import React, {useState} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import React from 'react';
 import * as userAuth from '../utils/userAuth';
+import FormRegisterAndLogin from "./FormRegisterAndLogin";
 
-const Register = ({onLogin, addInfoTooltipFalse}) => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const navigate = useNavigate();
-
-    const handleChangeEmail = (event) => {
-        setEmail(event.target.value)
-    }
-
-    const handleChangePassword = (event) => {
-        setPassword(event.target.value)
-    }
-
+const Login = ({onLogin, addInfoTooltipFalse, tokenCheck, email, password, setEmail, setPassword, navigate}) => {
     const handleSubmitAuthorizeForm = (e) => {
         e.preventDefault();
         userAuth.authorize(password, email).then(({token}) => {
             localStorage.setItem('jwt', token);
+            tokenCheck();
             onLogin();
             navigate('/');
-        }).catch(() => addInfoTooltipFalse())
+        }).catch((err) => {
+            console.log(err, 'err')
+            addInfoTooltipFalse()
+        })
     }
 
     return (
-        <div className="register">
-            <div className='register__wrapper'>
-                <p className="register__welcome">
-                    Вход
-                </p>
-                <form onSubmit={handleSubmitAuthorizeForm} className="register__form">
-                    <input
-                        className='register__input'
-                        placeholder="Email"
-                        id="useremail"
-                        name="useremail"
-                        type="email"
-                        value={email}
-                        onChange={handleChangeEmail}
-                        autoComplete="on"
-                        required/>
-                    <input
-                        className='register__input'
-                        placeholder="Пароль"
-                        id="password"
-                        name="password"
-                        type="password"
-                        value={password}
-                        autoComplete="on"
-                        onChange={handleChangePassword}
-                        required/>
-                    <button
-                        type="submit"
-                        className="register__button">
-                        Войти
-                    </button>
-                </form>
-            </div>
-        </div>
+        <FormRegisterAndLogin
+            header='Вход'
+            handleSubmitForm={handleSubmitAuthorizeForm}
+            nameForm='login'
+            autoComplete='on'
+            nameButton='Войти'
+            setEmail={setEmail}
+            setPassword={setPassword}
+            email={email}
+            password={password}
+        />
     );
 }
 
-export default Register;
+export default Login;

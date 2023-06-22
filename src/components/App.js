@@ -32,6 +32,7 @@ const App = () => {
     const [email, setEmail] = React.useState('')
     const [isMobile, setIsMobile] = React.useState(false);
     const {width} = UseWindowWidth();
+    const [password, setPassword] = React.useState("");
 
     React.useEffect(() => {
         if (isLoggedIn) {
@@ -64,23 +65,16 @@ const App = () => {
 
     React.useEffect(() => {
         tokenCheck();
-    }, [isLoggedIn])
+    }, [])
 
     const handleCardLike = (card) => {
         const isLiked = card.likes.some((elem) => elem['_id'] === currentUser['_id']);
-        if (!isLiked) {
-            api.addLikeCard(card['_id']).then((item) => {
-                setCards((cards) => cards.map((elem) => elem['_id'] === card['_id'] ? item : elem));
-            }).catch((err) => {
-                console.log(err)
-            })
-        } else {
-            api.deleteLikeCard(card['_id']).then((item) => {
-                setCards((cards) => cards.map((elem) => elem['_id'] === card['_id'] ? item : elem));
-            }).catch((err) => {
-                console.log(err)
-            })
-        }
+        const request = !isLiked ? api.addLikeCard(card['_id']) : api.deleteLikeCard(card['_id']);
+        request.then((item) => {
+            setCards((cards) => cards.map((elem) => elem['_id'] === card['_id'] ? item : elem));
+        }).catch((err) => {
+            console.log(err)
+        })
     }
 
     const handleCardDelete = (card) => {
@@ -154,8 +148,11 @@ const App = () => {
 
     const handleLogAuth = () => {
         localStorage.removeItem('jwt');
-        sessionStorage.removeItem('jwt')
         setLoggedIn(false);
+        setEmail('');
+        setPassword('')
+        setCurrentUser({})
+        setCards([]);
     }
 
     React.useEffect(() => {
@@ -186,10 +183,21 @@ const App = () => {
                                                              onCardDelete={handleCardDelete}/>}/>
                     <Route path="/sign-up"
                            element={<Register addInfoTooltipFalse={addInfoTooltipFalse}
-                                              addInfoTooltipSucces={addInfoTooltipSucces}/>}/>
+                                              addInfoTooltipSucces={addInfoTooltipSucces}
+                                              email={email}
+                                              setEmail={setEmail}
+                                              password={password}
+                                              setPassword={setPassword}
+                                              navigate={navigate}/>}/>
                     <Route path="/sign-in"
                            element={<Login onLogin={() => setLoggedIn(true)}
-                                           addInfoTooltipFalse={addInfoTooltipFalse}/>}/>
+                                           email={email}
+                                           setEmail={setEmail}
+                                           password={password}
+                                           setPassword={setPassword}
+                                           tokenCheck={tokenCheck}
+                                           addInfoTooltipFalse={addInfoTooltipFalse}
+                                           navigate={navigate}/>}/>
                     <Route
                         path="*"
                         element={<Navigate to="/" replace={true}/>}
