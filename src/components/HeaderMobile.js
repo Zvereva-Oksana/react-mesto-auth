@@ -1,6 +1,5 @@
 import {Link} from "react-router-dom";
 import logo from "../images/logo.svg";
-import CloseIcon from "../images/Close_Icon.svg";
 import React from "react";
 
 const HeaderMobile = ({email, onSignOut}) => {

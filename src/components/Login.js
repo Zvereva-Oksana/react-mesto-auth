@@ -2,12 +2,12 @@ import React from 'react';
 import * as userAuth from '../utils/userAuth';
 import FormRegisterAndLogin from "./FormRegisterAndLogin";
 
-const Login = ({onLogin, addInfoTooltipFalse, tokenCheck, email, password, setEmail, setPassword, navigate}) => {
+const Login = ({onLogin, addInfoTooltipFalse, email, password, setEmail, setPassword, navigate}) => {
     const handleSubmitAuthorizeForm = (e) => {
         e.preventDefault();
         userAuth.authorize(password, email).then(({token}) => {
+            setEmail(email)
             localStorage.setItem('jwt', token);
-            tokenCheck();
             onLogin();
             navigate('/');
         }).catch((err) => {

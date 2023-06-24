@@ -168,7 +168,7 @@ const App = () => {
             <div className={`page ${
                 isLoggedIn ? '' : `page_registration-authorization`}`}>
                 {isMobile && isLoggedIn ?
-                    <HeaderMobile email={email} onSignOut={handleLogAuth} isLoggedIn={isLoggedIn}/> :
+                    <HeaderMobile email={email} onSignOut={handleLogAuth} /> :
                     <Header email={email} onSignOut={handleLogAuth} isLoggedIn={isLoggedIn}/>
                 }
                 <Routes>
@@ -195,7 +195,6 @@ const App = () => {
                                            setEmail={setEmail}
                                            password={password}
                                            setPassword={setPassword}
-                                           tokenCheck={tokenCheck}
                                            addInfoTooltipFalse={addInfoTooltipFalse}
                                            navigate={navigate}/>}/>
                     <Route
