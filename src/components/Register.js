@@ -7,7 +7,7 @@ const Register = ({addInfoTooltipFalse, addInfoTooltipSucces, setEmail, setPassw
 
     const handleSubmitRegisterForm = (event) => {
         event.preventDefault();
-        userAuth.register(password, email).then((data) => {
+        userAuth.register(password, email).then(() => {
             addInfoTooltipSucces();
             navigate('/sign-in');
         }).catch(() => addInfoTooltipFalse())

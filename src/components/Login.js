@@ -10,7 +10,7 @@ const Login = ({onLogin, addInfoTooltipFalse, email, password, setEmail, setPass
             localStorage.setItem('jwt', token);
             onLogin();
             navigate('/');
-        }).catch((err) => {
+        }).catch(() => {
             addInfoTooltipFalse()
         })
     }

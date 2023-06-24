@@ -57,7 +57,7 @@ const App = () => {
                 setLoggedIn(true);
                 navigate('/')
             })
-                .catch((err) => {
+                .catch(() => {
                     setLoggedIn(false)
                 })
         }
